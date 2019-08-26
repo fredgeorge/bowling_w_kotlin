@@ -33,7 +33,7 @@ internal class Frame {
     internal inner class InFrameRoll : FrameState {
         override fun roll(bowlResult: BowlResult): BowlResult? {
             rolls.add(bowlResult)
-            state = CompleteFrame()
+            state = if (score() == 10) OneExtraBall() else CompleteFrame()
             return null
         }
     }
