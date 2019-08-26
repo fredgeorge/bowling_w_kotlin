@@ -19,8 +19,20 @@ internal class BowlingGameTest {
         roll(0.pins * 20)
         assertEquals(0, game.score())
     }
-    
-    private fun roll(bowl: Bowl) = roll(listOf(bowl))
 
-    private fun roll(bowls: List<Bowl>) = game.roll(bowls)
+    @Test internal fun `few equal pins`() {
+        roll(4.pins * 20)
+        assertEquals(80, game.score())
+    }
+
+    @Test internal fun `few different pins w no strikes or spares`() {
+        roll(3.pins * 10)
+        roll(2.pins * 6)
+        roll(4.pins * 4)
+        assertEquals(58, game.score())
+    }
+
+    private fun roll(bowlResult: BowlResult) = roll(listOf(bowlResult))
+
+    private fun roll(bowlResults: List<BowlResult>) = game.roll(bowlResults)
 }

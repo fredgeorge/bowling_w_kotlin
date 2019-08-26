@@ -12,5 +12,10 @@ class BowlingGame {
 
     fun score() = frames.sumBy { it.score() }
 
-    infix fun roll(bowls: List<Bowl>) {}
+    infix fun roll(bowlResults: List<BowlResult>) {
+        bowlResults.forEach {
+            var currentResult: BowlResult? = it
+            frames.forEach { currentResult = it.roll(currentResult) }
+        }
+    }
 }
