@@ -25,7 +25,7 @@ internal class Frame {
     internal inner class EmptyFrame : FrameState {
         override fun roll(bowlResult: BowlResult): BowlResult? {
             rolls.add(bowlResult)
-            state = InFrameRoll()
+            state = if (score() == 10) TwoExtraBalls() else InFrameRoll()
             return null
         }
     }
@@ -42,6 +42,21 @@ internal class Frame {
         override fun roll(bowlResult: BowlResult): BowlResult? {
             return bowlResult
         }
+    }
 
+    internal inner class TwoExtraBalls: FrameState {
+        override fun roll(bowlResult: BowlResult): BowlResult? {
+            rolls.add(bowlResult)
+            state = OneExtraBall()
+            return bowlResult
+        }
+    }
+
+    internal inner class OneExtraBall: FrameState {
+        override fun roll(bowlResult: BowlResult): BowlResult? {
+            rolls.add(bowlResult)
+            state = CompleteFrame()
+            return bowlResult
+        }
     }
 }

@@ -32,6 +32,12 @@ internal class BowlingGameTest {
         assertEquals(58, game.score())
     }
 
+    @Test internal fun `initial strike`() {
+        roll(10.pins)
+        roll(4.pins * 18)
+        assertEquals(90, game.score())
+    }
+
     private fun roll(bowlResult: BowlResult) = roll(listOf(bowlResult))
 
     private fun roll(bowlResults: List<BowlResult>) = game.roll(bowlResults)
